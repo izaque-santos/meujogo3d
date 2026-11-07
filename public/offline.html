@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Mundo 3D</title>
+<style>html,body{margin:0;height:100%;background:#0b0820;color:#fff;font:600 16px system-ui,sans-serif}body{display:flex;align-items:center;justify-content:center;text-align:center}
+.c{padding:24px;max-width:340px}h1{margin:0 0 8px;font-size:34px;background:linear-gradient(90deg,#22d3ee,#a855f7,#ec4899);-webkit-background-clip:text;background-clip:text;color:transparent}
+p{opacity:.85;line-height:1.4}.b{width:44px;height:44px;margin:18px auto;border-radius:50%;border:4px solid rgba(255,255,255,.15);border-top-color:#a855f7;animation:g 1s linear infinite}
+button{margin-top:6px;padding:12px 26px;border:0;border-radius:14px;background:linear-gradient(90deg,#7c3aed,#db2777);color:#fff;font:800 16px system-ui}@keyframes g{to{transform:rotate(360deg)}}</style></head>
+<body><div class="c"><h1>MUNDO 3D</h1><div class="b"></div><p id="t">Ligando o servidor do jogo… isso pode levar até 1 minuto.</p><button onclick="vai()">Tentar agora</button></div>
+<script>
+var URL_JOGO = 'https://mundo-3d.onrender.com/', n = 0;
+function vai() { location.href = URL_JOGO + '?t=' + Date.now(); }
+setInterval(function () { n++; if (!navigator.onLine) document.getElementById('t').textContent = 'Sem internet. Conecte e o jogo abre sozinho.'; else vai(); }, 9000);
+</script></body></html>

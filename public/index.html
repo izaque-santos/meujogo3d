@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#0b0a1a">
+<title>Mundo 3D</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div id="tv"><div id="tvCam"></div></div>
+<canvas id="gl"></canvas>
+<section id="s-auth" class="screen on">
+  <div class="au">
+    <div class="aup" id="auPanel">
+      <div class="aut"><button class="pick sel" id="tabLogin" type="button"><span>👤</span>ENTRAR</button><button class="pick" id="tabReg" type="button"><span>➕</span>CRIAR CONTA</button></div>
+      <div id="fName" class="auf" hidden><i>👤</i><input id="aName" maxlength="18" placeholder="Nome no jogo" autocomplete="username"></div>
+      <div class="auf"><i>✉️</i><input id="aEmail" type="email" maxlength="254" placeholder="E-mail" autocomplete="email" autocapitalize="off"></div>
+      <div class="auf"><i>🔒</i><input id="aPass" type="password" maxlength="100" placeholder="Senha (mínimo 6)" autocomplete="current-password"><button id="aEye" type="button" title="Mostrar senha">👁️</button></div>
+      <button class="go" id="authBtn">ENTRAR</button>
+      <div id="authErr" class="err"></div>
+      <button class="linkbtn" id="forgotBtn" type="button">🔑 Esqueci a senha</button>
+    </div>
+  </div>
+</section>
+<section id="s-profile" class="screen">
+  <div class="cc">
+    <div id="nameRow" hidden><input id="nameIn" maxlength="18" readonly></div><div id="colors" hidden></div>
+    <canvas id="ccGl"></canvas>
+    <div id="ccTabs"></div>
+    <div id="ccPanel">
+      <div class="ccbox" id="ccSexo"><h4><img src="/hud/cci1.webp" alt="">SEXO</h4><div class="ccg"><button class="ccs" id="g-male" data-g="male"><img src="/hud/ccm.webp" alt="">HOMEM</button><button class="ccs fem" id="g-female" data-g="female"><img src="/hud/ccf.webp" alt="">MULHER</button></div></div>
+      <div id="ccBody"></div>
+    </div>
+    <div id="ccSty"><button id="ccPrev" type="button" aria-label="Estilo anterior">‹</button><b id="ccStyN"></b><button id="ccNext" type="button" aria-label="Próximo estilo">›</button></div>
+    <button id="ccBack"><span>‹</span>VOLTAR</button>
+    <button id="profileBtn"><span>✓</span>CONFIRMAR</button>
+    <div id="profileErr"></div>
+  </div>
+</section>
+
+<div id="cel" hidden></div>
+<div id="hud" hidden>
+  <div id="mapa"><canvas id="mapaC" width="260" height="260"></canvas><b>N</b><i></i><u id="mapaN"></u></div>
+  <div id="mapaB"><button id="mbPin" title="Viajar"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a7.5 7.5 0 0 0-7.5 7.5C4.5 15 12 22 12 22s7.5-7 7.5-12.5A7.5 7.5 0 0 0 12 2zm0 10.2a2.8 2.8 0 1 1 0-5.6 2.8 2.8 0 0 1 0 5.6z"/></svg></button><button id="mbExp" title="Ampliar mapa"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9V3h6M21 9V3h-6M3 15v6h6M21 15v6h-6M3 3l6 6M21 3l-6 6M3 21l6-6M21 21l-6-6"/></svg></button></div>
+  <img id="logo" src="/hud/blogo.webp" alt="Mundo 3D">
+  <button id="aviso"><img src="/hud/ialert.webp" alt=""><span><b>Bem-vindo ao Mundo 3D!</b><small>Aproveite seu jogo!</small></span><u>›</u></button>
+  <div id="din"><img src="/hud/icash.webp" alt=""><b id="coinN">0</b><img src="/hud/igem.webp" alt=""><b id="gemN">0</b><button id="mais">+</button></div>
+  <div id="need"><span>🍗<i><u id="nF"></u></i></span><span>💧<i><u id="nS"></u></i></span><span>🚽<i><u id="nB"></u></i></span></div>
+  <div id="lvb"><b id="lvN">LV. 1</b><i><u id="lvF"></u></i></div>
+  <div id="topo"><button id="bLoja" title="Loja"></button><button id="bInv" title="Inventário"></button><button id="bCel" title="Celular"></button><button id="bGraf" title="Gráficos"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round" aria-hidden="true"><path d="M3 6h10M19 6h2M3 12h3M12 12h9M3 18h12M21 18h0"/><circle cx="16" cy="6" r="2.6"/><circle cx="9" cy="12" r="2.6"/><circle cx="18" cy="18" r="2.6"/></svg><small>Gráficos</small></button><button id="bMenu" title="Menu"></button></div>
+  <button id="bMic" class="rd" title="Microfone"></button><button id="bTreino" hidden>🤖 TREINAR</button><button id="bArma" title="Trocar arma" hidden>🔫</button><div id="invPill" hidden>👻 Invisível</div><button id="bEmo" title="Emotes">😀</button><button id="bPvp" title="Chamar para PvP" hidden>⚔️ CHAMAR</button>
+  <div id="joy"><div id="knob"></div><em>▲</em><em>▼</em><em>◀</em><em>▶</em></div>
+  <button id="bSoco" class="rd" title="Soco"></button><button id="bRun" class="rd" title="Correr"></button><button id="bPulo" class="rd" title="Pular"></button><button id="bUp" class="rd" hidden>▲</button><button id="bDn" class="rd" hidden>▼</button>
+  <div id="chatLog"></div>
+  <div id="chat"><img src="/hud/ichat.webp" alt=""><div><input id="chatIn" maxlength="200" placeholder="Digite sua mensagem..." autocomplete="off" enterkeyhint="send"><button id="chatGo"></button></div></div>
+  <div id="preso" hidden></div><div id="conv" hidden></div><button id="bAcao" hidden></button><button id="bJob" hidden></button>
+  <div id="toast"></div>
+  <aside id="pain" hidden><div class="ph"><b id="painT"></b><button id="painX">✕</button></div><div id="painB"></div></aside>
+</div>
+<script src="/vendor/three.min.js"></script>
+<script src="/vendor/fflate.min.js"></script>
+<script src="/vendor/FBXLoader.js"></script>
+<script src="/vendor/GLTFLoader.js"></script>
+<script src="/shared/looks.js"></script>
+<script src="/shared/levels.js"></script>
+<script src="/shared/world.js"></script>
+<script src="/config.js"></script>
+<script src="/avatar.js"></script>
+<script src="/yacht.js"></script>
+<script src="/island.js"></script>
+<script src="/park.js"></script>
+<script src="/petshop.js"></script>
+<script src="/beach.js"></script>
+<script src="/jail.js"></script>
+<script src="/market.js"></script>
+<script src="/zoo.js"></script>
+<script src="/places.js"></script>
+<script src="/arena.js"></script>
+<script src="/pvp.js"></script>
+<script src="/extras.js"></script>
+<script src="/trem.js"></script>
+<script src="/sereia.js"></script>
+<script src="/empregos.js"></script>
+<script src="/nessie.js"></script>
+<script src="/marvida.js"></script>
+<script src="/minimapa.js"></script>
+<script src="/ombro.js"></script>
+<script src="/cidade.js"></script>
+<script src="/job-model.js"></script>
+<script src="/novos.js"></script>
+<script src="/mais.js"></script>
+<script src="/guarda.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>

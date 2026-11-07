@@ -1,0 +1,27 @@
+{
+  "name": "mundo-3d",
+  "version": "1.0.0",
+  "description": "Mundo 3D: jogo social 3D online",
+  "private": true,
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "test": "node test/accounts.test.js && node test/restore.test.js && node test/reset.test.js && node test/cloud.test.js && node test/ghdados.test.js && node test/static.test.js && node test/world.test.js && node test/pvp.test.js",
+    "android:add": "npx cap add android",
+    "android:sync": "npm run sync && npx cap sync android",
+    "android:debug": "npm run sync && npx cap sync android && cd android && ./gradlew assembleDebug",
+    "sync": "cp shared/*.js public/shared/"
+  },
+  "dependencies": {
+    "three": "0.128.0",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@capacitor/android": "^6.2.0",
+    "@capacitor/cli": "^6.2.0",
+    "@capacitor/core": "^6.2.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

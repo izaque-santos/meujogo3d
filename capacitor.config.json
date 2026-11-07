@@ -1,0 +1,16 @@
+{
+  "appId": "com.mundo3d.game",
+  "appName": "Mundo 3D",
+  "webDir": "public",
+  "server": {
+    "url": "https://mundo-3d.onrender.com",
+    "androidScheme": "https",
+    "errorPath": "offline.html",
+    "allowNavigation": [
+      "mundo-3d.onrender.com"
+    ]
+  },
+  "android": {
+    "allowMixedContent": false
+  }
+}
